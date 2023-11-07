@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Creat Todo Button */
+.button-add{
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: aliceblue;
+    color: black;
+    display: flex;
+    font-size: 50px;
+    justify-items: center;
+    height: 64px;
+    width: 64px;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
+    padding-bottom: 11px;
+    z-index: 1;
+
+    transform: rotate(0);
+    transition: .3s ease;
+}
+
+.button-add:hover {
+    transform: rotate(224deg);
+}
+

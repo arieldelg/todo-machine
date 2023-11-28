@@ -1,13 +1,13 @@
 import React from "react";
 import { useLocalStorage } from "./useLocalStorage";
+import { useEffect } from 'react';
 
-const TodoContext = React.createContext()
 
-const TodoProvider = ({ children }) => {
+const useTodos = () => {
     // Modal / Abrir y cerrar Modal
     const [openModal, setOpenModal] = React.useState(false)
     // Array de Todos (Array Madre)
-    const { item: todos, saveItem: setTodos, loading, } = useLocalStorage('TODOS_V1', [])
+    const { item: todos, saveItem: setTodos, loading, syncUp } = useLocalStorage('TODOS_V1', [])
     // Todo Search
     const [search, setSearch] = React.useState('')
     // Todo Counter / Estado derivados
@@ -33,24 +33,36 @@ const TodoProvider = ({ children }) => {
         }
         setTodos(newTodos)
     }
-    return (
-        <TodoContext.Provider value={{
-            search,
-            setSearch,
-            totalTodos,
-            completedTodos,
-            toSearched,
-            deleteTodos,
-            completeTodos,
-            loading,
-            openModal,
-            setOpenModal,
-            todos,
-            setTodos
-        }}>
-            { children }
-        </TodoContext.Provider>
-    )
+    const [openUpdateModal, setOpenUpdateModal] = React.useState(false)
+    const change = ({ key }) => {
+        if (key === 'TODOS_V1') {
+            setOpenUpdateModal(true)
+        }
+    }
+    window.addEventListener('storage', change)
+    const state = {
+        search,
+        totalTodos,
+        completedTodos,
+        toSearched,
+        loading,
+        openModal,
+        todos,
+        openUpdateModal,
+    } 
+    const stateUpdater = {
+        setSearch,
+        setOpenModal,
+        setTodos,
+        setOpenUpdateModal, 
+    }
+
+    const functions = {
+        deleteTodos,
+        completeTodos,
+        syncUp, 
+    }
+    return { state, stateUpdater, functions }
 }
 
-export { TodoContext, TodoProvider}
+export { useTodos }

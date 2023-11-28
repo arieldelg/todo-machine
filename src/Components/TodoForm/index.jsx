@@ -1,8 +1,6 @@
 import React from "react";
-import { TodoContext } from "../TodoContext";
 
-const TodoForm = () => {
-    const { setOpenModal, todos, setTodos } = React.useContext(TodoContext)
+const TodoForm = ({ setOpenModal, todos, setTodos }) => {
     const [newAddTodo, setnewAddTodo] = React.useState('')
     const writeTodo = (event) => {
         setnewAddTodo(event.target.value)

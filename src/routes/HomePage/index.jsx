@@ -1,24 +1,25 @@
 import React from "react";
-import { useTodos } from "./useTodos";
-import { TodoList } from '../Components/TodoList'
-import { TodoItem } from '../Components/TodoItem'
-import { TodoCounter } from '../Components/TodoCounter'
-import { TodoSearch } from '../Components/TodoSearch'
-import { CreateTodoButton } from '../Components/CreateTodoButton'
-import { AllTodosCompleted } from "../Components/AllTodosCompleted";
-import { TodoNotFound } from "../Components/TodoNotFound";
-import { FirstTodo } from "../Components/FirstTodo";
 import { IoCreateOutline } from 'react-icons/io5';
-import { Loading } from "../Components/LoadingTodo/Loading";
-import { LoadingSkeleton } from "../Components/LoadingTodo/LoadingSkeleton";
-import { Modal } from "../Components/Modal";
-import { TodoForm } from "../Components/TodoForm";
-import './App.css'
-import { TodoHeader } from "../Components/TodoHeader";
-import { ChangeAlert } from "../Components/ChangeAlert";
-import { UpdateModal } from "../Components/UpdateModal";
+import { useTodos } from "../useTodos";
+import { TodoList } from '../../ui/TodoList'
+import { TodoItem } from '../../ui/TodoItem'
+import { TodoCounter } from '../../ui/TodoCounter'
+import { TodoSearch } from '../../ui/TodoSearch'
+import { CreateTodoButton } from '../../ui/CreateTodoButton'
+import { AllTodosCompleted } from "../../ui/AllTodosCompleted";
+import { TodoNotFound } from "../../ui/TodoNotFound";
+import { FirstTodo } from "../../ui/FirstTodo";
+import { Loading } from "../../ui/LoadingTodo/Loading";
+import { LoadingSkeleton } from "../../ui/LoadingTodo/LoadingSkeleton";
+import { Modal } from "../../ui/Modal";
+import { TodoForm } from "../../ui/TodoForm";
+import { TodoHeader } from "../../ui/TodoHeader";
+import { ChangeAlert } from "../../ui/ChangeAlert";
+import { UpdateModal } from "../../ui/UpdateModal";
+import '../../routes/App.css'
+import { NavLink } from "react-router-dom";
 
-const App = () => {
+const HomePage = () => {
 const { state, stateUpdater, functions } = useTodos()
 const {
         search,
@@ -26,9 +27,8 @@ const {
         completedTodos,
         toSearched,
         loading,
-        openModal,
-        todos,
         openUpdateModal,
+        dataTodo
 } = state
 const {
         setSearch,
@@ -37,9 +37,11 @@ const {
         setOpenUpdateModal, 
 } = stateUpdater
 const {
-        deleteTodos,
-        completeTodos,
+        // deleteTodos,
+        // completeTodos,
         syncUp, 
+        fetchNotePuttWithID,
+        deleteFetchNote
 } = functions
 const renderView = () => {
   if (toSearched.length > 0) {
@@ -62,6 +64,7 @@ const renderView = () => {
       loading={loading}
       search={search}
       toSearched={toSearched}
+      
       onLoading={ () => 
       <>
       <LoadingSkeleton/>
@@ -71,7 +74,7 @@ const renderView = () => {
       }
       onEmpty={ () => <IoCreateOutline className='text-white text-6xl'/>}
       render={ element => (
-        <TodoItem data={element} key={element.text} deleteTodos={deleteTodos} completeTodos={completeTodos}/>
+        <TodoItem data={element} key={element.id} fetchNotePuttWithID={fetchNotePuttWithID} deleteFetchNote={deleteFetchNote}/>
       )}
     >
       {/* {
@@ -80,13 +83,9 @@ const renderView = () => {
         )
       } */}
     </TodoList>
-    <CreateTodoButton setOpenModal={setOpenModal} openModal={openModal}/>
-    {
-    openModal && 
-    <Modal>
-      <TodoForm setOpenModal={setOpenModal} todos={todos} setTodos={setTodos}/>
-    </Modal>
-    }
+    <NavLink to={'/new-todo'}>
+      <CreateTodoButton/> 
+    </NavLink>
     {
       openUpdateModal &&
       <UpdateModal>
@@ -97,4 +96,4 @@ const renderView = () => {
   )
 }
 
-export { App }
+export { HomePage }

@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 
-const initialState = ({ initialValue }) => ({
+const initialState = ( initialValue ) => ({
     synchronization: true,
     item: initialValue,
     loading:true
@@ -32,8 +32,9 @@ const reducer = (state, action) => {
 }
 
 const useLocalStorage = (initialName, initialValue) => {
-    const [state, dispatch] = useReducer(reducer, initialState({ initialValue }))
+    const [state, dispatch] = useReducer(reducer, initialState( initialValue ))
     const { synchronization, item, loading} = state
+    
 const onLoading = (props) => {
     dispatch({ type: actionTypes.loading, payload: props })
 }
@@ -61,7 +62,7 @@ useEffect(() => {
             onLoading(false)
             console.log(error)
         }
-    }, 1000)
+    }, 4000)
 }, [synchronization])
 const saveItem = (newItem) => {
     localStorage.setItem(initialName, JSON.stringify(newItem)) 

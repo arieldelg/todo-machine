@@ -32,8 +32,7 @@ const {
 } = state
 const {
         setSearch,
-        setOpenModal,
-        setTodos,
+      
         setOpenUpdateModal, 
 } = stateUpdater
 const {
@@ -83,7 +82,7 @@ const renderView = () => {
         )
       } */}
     </TodoList>
-    <NavLink to={'/new-todo'}>
+    <NavLink to={'todo-machine/new-todo'}>
       <CreateTodoButton/> 
     </NavLink>
     {

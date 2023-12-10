@@ -14,7 +14,7 @@ const EditPage = () => {
     const [newAddTodo, setnewAddTodo] = React.useState(state.text)
     
     const upploadeTodo = () => {
-        navigate('todo-machine/')
+        navigate('/todo-machine')
         fetchNotePuttWithID(id, 'edit', newAddTodo)
     }
     return (

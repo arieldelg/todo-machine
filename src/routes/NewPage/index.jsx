@@ -13,7 +13,7 @@ const NewPage = () => {
             completed: false
         }
         fetchNotePost(newData)
-        navigate('todo-machine/')
+        navigate('/todo-machine')
     }
     return (
         <div className="h-screen flex">

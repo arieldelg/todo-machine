@@ -82,7 +82,7 @@ const renderView = () => {
         )
       } */}
     </TodoList>
-    <NavLink to={'todo-machine/new-todo'}>
+    <NavLink to={'/todo-machine/new-todo'}>
       <CreateTodoButton/> 
     </NavLink>
     {

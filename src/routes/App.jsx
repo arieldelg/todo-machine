@@ -9,8 +9,8 @@ import { NotFound } from "./NotFound";
 const AppRoutes = () => {
   const routes = useRoutes([
     {path: 'todo-machine/', element: <HomePage/>},
-    {path: 'todo-machine/edit/:id', element: <EditPage/>},
-    {path: 'todo-machine/new-todo', element: <NewPage/>},
+    {path: '/todo-machine/edit/:id', element: <EditPage/>},
+    {path: '/todo-machine/new-todo', element: <NewPage/>},
     {path: 'todo-machine/*', element: <NotFound/>},
   ])
   return routes
